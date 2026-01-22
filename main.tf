@@ -18,7 +18,7 @@ module "nginx_userdata" {
 module "ec2_instance" {
 	source = "./modules/ec2-base"
 
-	name_prefix = "nginxtest"
+	name_prefix = var.name_prefix
 
 	aws_region = var.aws_region
 	aws_account_id = local.aws_account_id

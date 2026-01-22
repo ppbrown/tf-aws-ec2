@@ -14,7 +14,7 @@
 
 variable "name_prefix" {
   type    = string
-  default = "testapp"
+  default = "nginxtest"
 }
 
 variable "aws_region" {
