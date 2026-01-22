@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Note: can make use of terraform templating to replace values in here.
+# However, might be best to use aws secrets manager from here instead
+
+set -euo pipefail
+
+dnf -y update
+dnf -y install nginx
+
+systemctl enable --now nginx
+
