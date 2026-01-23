@@ -63,6 +63,11 @@ variable "tags" {
   default = {}
 }
 
+# To allow for Systems Manager connect via ssm_instance_profile
+variable "iam_instance_profile" {
+  type = string
+}
+
 variable "user_data" {
   type    = string
   default = null

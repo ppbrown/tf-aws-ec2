@@ -49,6 +49,8 @@ resource "aws_instance" "this" {
     http_put_response_hop_limit = 1
   }
 
+  iam_instance_profile = var.iam_instance_profile
+
   user_data                   = var.user_data
   user_data_replace_on_change = var.user_data_replace_on_change
 
