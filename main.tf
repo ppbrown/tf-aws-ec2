@@ -18,11 +18,10 @@ module "nginx_userdata" {
 	source = "./modules/nginx_userdata"
 }
 
-
-module "ec2_instance" {
+module "nginx" {
 	source = "./modules/ec2_base"
 
-	name_prefix = var.name_prefix
+	name_prefix = "nginx"
 
 	aws_region = var.aws_region
 	aws_account_id = local.aws_account_id
@@ -30,5 +29,18 @@ module "ec2_instance" {
 	iam_instance_profile = module.ssm_profile.instance_profile_name
 
 	user_data = module.nginx_userdata.user_data
+	user_data_replace_on_change = true
+}
+
+module "otherinstance" {
+	source = "./modules/ec2_base"
+
+	name_prefix = "other"
+
+	aws_region = var.aws_region
+	aws_account_id = local.aws_account_id
+
+	iam_instance_profile = module.ssm_profile.instance_profile_name
+
 	user_data_replace_on_change = true
 }
