@@ -31,12 +31,17 @@ variable "subnet_id" {
 }
 
 #note: not "ids"
+#and not used any more...?
 variable "vpc_security_group_names" {
   type        = list(string)
   description = "Security Group name(s) to attach to EC2 instance"
   default     = ["default"]  
   # You should probably should either change this, 
   # or ensure that "default" has sane and secure values
+}
+variable "security_group_ids" {
+  type        = list(string)
+  description = "Security Group ID(s) to attach to EC2 instance"
 }
 
 

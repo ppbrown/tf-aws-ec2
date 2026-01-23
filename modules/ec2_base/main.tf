@@ -28,12 +28,19 @@ data "aws_ami" "amazon_linux_latest" {
   }
 }
 
+locals {
+  effective_user_data = coalesce(
+    var.user_data,
+    templatefile("${path.module}/user_data.generic", {})
+  )
+}
+
 
 resource "aws_instance" "this" {
   ami                    = data.aws_ami.amazon_linux_latest.id
   instance_type          = var.instance_type
   subnet_id              = local.effective_subnet_id
-  vpc_security_group_ids = [for sg in data.aws_security_group.by_name : sg.id]
+  vpc_security_group_ids = var.security_group_ids
 
   # Optional:
   # associate_public_ip_address = true
@@ -51,11 +58,11 @@ resource "aws_instance" "this" {
 
   iam_instance_profile = var.iam_instance_profile
 
-  user_data                   = var.user_data
+  user_data                   = local.effective_user_data
   user_data_replace_on_change = var.user_data_replace_on_change
 
   monitoring              = true  # Note: this costs money
-  disable_api_termination = true
+  disable_api_termination = false
 
   tags = merge(var.tags, { Name = "${var.name_prefix}-ec2" })
 }

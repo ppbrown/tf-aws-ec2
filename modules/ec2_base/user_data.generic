@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Note: can make use of terraform templating to replace values in here.
+#
+# We presume Amazon Linux
+
+set -euo pipefail
+
+dnf -y update
+dnf install -y amazon-ssm-agent
+
+# In theory this is redundant...
+systemctl enable --now amazon-ssm-agent
+
+
+
+
