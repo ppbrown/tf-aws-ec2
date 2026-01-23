@@ -1,7 +1,14 @@
-
-#
-# Test harness to load the desired modules
-#
+//
+// Test harness to load the desired modules used in conjunction with
+// EC2 instances. 
+// This framework allows for control of multiple instances,
+// of differing types
+// Data common to all of them is loaded in this file.
+// For specific instance examples, see "ec2-*.tf"
+// 
+// At present, internal customization of instances is done through
+// inclusion of the appropriate userdata module such as
+//    modules/nginx_userdata
 
 data "aws_caller_identity" "current" {}
 
