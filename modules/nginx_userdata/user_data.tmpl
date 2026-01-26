@@ -6,7 +6,12 @@
 set -euo pipefail
 
 dnf -y update
-dnf -y install nginx
+dnf -y install nginx amazon-ssm-agent
+
+# In theory this is redundant...
+systemctl enable --now amazon-ssm-agent
+
+
 
 systemctl enable --now nginx
 
