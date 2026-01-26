@@ -56,6 +56,13 @@ resource "aws_instance" "this" {
     http_put_response_hop_limit = 1
   }
 
+  root_block_device {
+    volume_size = var.root_volume_gb
+    volume_type = "gp3" # Optional: e.g., "gp2", "io1" (defaults to "gp2")
+    delete_on_termination = true # Optional: defaults to true
+    encrypted = true # Optional: defaults to false
+  }
+
   iam_instance_profile = var.iam_instance_profile
 
   user_data                   = local.effective_user_data
